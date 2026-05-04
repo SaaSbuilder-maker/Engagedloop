@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "name": "engagedloop",
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/privacy-policy",
+      "dest": "/privacy-policy.html"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/privacy-policy.html"
+    }
+  ]
+}

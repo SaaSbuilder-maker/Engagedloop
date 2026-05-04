@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background -->
+  <rect width="128" height="128" rx="23" fill="#0A0A0A"/>
+  
+  <!-- Speech Bubble -->
+  <path d="M25 35 L103 35 L103 75 L55 75 L35 95 L35 75 L25 75 Z" fill="#1D9BF0" rx="12"/>
+  
+  <!-- Bubble rounded corners effect -->
+  <rect x="25" y="35" width="78" height="40" rx="12" fill="#1D9BF0"/>
+  
+  <!-- Tail -->
+  <path d="M35 75 L35 95 L55 75 Z" fill="#1D9BF0"/>
+</svg>

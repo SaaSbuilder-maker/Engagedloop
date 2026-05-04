@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENGAGEDLOOP — Reply Smarter on X</title>
+  <link rel="icon" type="image/png" href="icons/icon32.png">
+  <style>
+    :root {
+      --bg: #000000;
+      --panel: #0a0a0a;
+      --border: #222222;
+      --text: #e5e5e5;
+      --text-dim: #666666;
+      --accent: #f97316;
+      --alert: #ef4444;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img, svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Scanline overlay */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(34, 34, 34, 0.3) 2px,
+          rgba(34, 34, 34, 0.3) 4px
+        );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-small {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+    }
+
+    .header-title {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .header-title span {
+      color: var(--accent);
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 40px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-headline {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .quote-mark {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 16px 32px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .hero-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* CTA Buttons */
+    .cta-section {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 14px 28px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.3);
+    }
+
+    .cta-btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .cta-btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Features */
+    .features {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 32px;
+      transition: all 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* Pricing */
+    .pricing {
+      padding: 80px 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .pricing-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 48px;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .pricing-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .pricing-card.featured::before {
+      content: 'POPULAR';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--bg);
+      padding: 4px 16px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .pricing-tier {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .pricing-price {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .pricing-price span {
+      font-size: 16px;
+      color: var(--text-dim);
+      font-weight: normal;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin: 32px 0;
+      text-align: left;
+    }
+
+    .pricing-features li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .pricing-features li::before {
+      content: '✓ ';
+      color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-headline {
+        font-size: 36px;
+      }
+
+      .hero-subtitle {
+        max-width: 100%;
+      }
+
+      .cta-section {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 16px 20px;
+      }
+
+      .brand-title {
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 100px 20px 40px;
+      }
+
+      .hero-headline {
+        font-size: 28px;
+      }
+
+      .features,
+      .pricing {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <img src="icons/icon32.png" alt="ENGAGEDLOOP" class="logo-small">
+      <div class="header-title">// ENGAGEDLOOP // <span>[STATUS: LIVE]</span></div>
+    </div>
+    <div class="brand-title">ENGAGEDLOOP</div>
+    <img src="icons/icon48.png" alt="ENGAGEDLOOP" class="logo">
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-left">
+        <h1 class="hero-headline">
+          <span class="quote-mark">"</span>REPLY SMARTER ON X<span class="quote-mark">"</span>
+        </h1>
+        <p class="hero-subtitle">
+          Generate human-like replies when you don't know what to say. 
+          Stay consistent. Get noticed.
+        </p>
+        <div class="cta-section">
+          <a href="#pricing" class="cta-btn">
+            Get Started — It's Free
+          </a>
+          <a href="https://chrome.google.com/webstore" target="_blank" class="cta-btn cta-btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="10" fill="#f97316"/>
+              <path d="M12 6v6l4 2" stroke="black" stroke-width="2" fill="none"/>
+              <circle cx="12" cy="12" r="3" fill="black"/>
+            </svg>
+            Add to Chrome
+          </a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <!-- Simple value prop instead of complex diagnostic -->
+        <div style="background: var(--panel); border: 1px solid var(--border); padding: 32px;">
+          <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 16px;">// HOW_IT_WORKS</div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent); font-weight: bold;">01</span>
+              <span>Click the [EΣ] button on any tweet</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent); font-weight: bold;">02</span>
+              <span>Get 3 AI-generated reply options</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent); font-weight: bold;">03</span>
+              <span>Paste, edit, and post</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        <div class="feature-title">⚡ SMART_REPLIES</div>
+        <div class="feature-desc">AI analyzes tweet context and generates 3 targeted replies using proven engagement formulas.</div>
+      </div>
+      
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+        <div class="feature-title">⚡ QUICK_PASTE</div>
+        <div class="feature-desc">Paste any tweet text and generate replies instantly. No need to navigate to the tweet.</div>
+      </div>
+      
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+        </svg>
+        <div class="feature-title">⚡ SAFETY_FIRST</div>
+        <div class="feature-desc">Edit every reply before posting. No automation. You stay in full control.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <h2 class="pricing-title">Simple Pricing</h2>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <div class="pricing-tier">Free</div>
+        <div class="pricing-price">$0<span>/month</span></div>
+        <ul class="pricing-features">
+          <li>10 replies per day</li>
+          <li>Basic reply styles</li>
+          <li>Standard response time</li>
+        </ul>
+        <a href="#" class="cta-btn cta-btn-secondary" style="width: 100%; justify-content: center;">
+          Get Started
+        </a>
+      </div>
+      
+      <div class="pricing-card featured">
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-price">$9<span>/month</span></div>
+        <ul class="pricing-features">
+          <li>Unlimited replies</li>
+          <li>Advanced reply styles</li>
+          <li>Priority response time</li>
+          <li>Playbook dashboard</li>
+        </ul>
+        <a href="#" class="cta-btn" style="width: 100%; justify-content: center;">
+          Upgrade to Pro
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 ENGAGEDLOOP // All rights reserved</div>
+    <div style="margin-top: 12px; font-size: 12px; color: var(--text-dim);">
+      <a href="privacy-policy.html">Privacy Policy</a> • 
+      <a href="mailto:engagedloop@gmail.com">Contact</a>
+    </div>
+  </footer>
+</body>
+</html>
