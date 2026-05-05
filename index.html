@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1440, initial-scale=0.25, maximum-scale=1.0, user-scalable=yes">
   <title>// ENGAGEDLOOP // [BETA_ACCESS_LIVE]</title>
   <style>
     *,
@@ -1428,251 +1428,23 @@
       text-align: right;
     }
     
-    /* ===== RESPONSIVE STYLES FOR ALL DEVICES ===== */
+    /* ===== SUPERX STYLE - DESKTOP SCALED TO ALL DEVICES ===== */
     
-    /* Prevent horizontal overflow */
+    /* Full desktop layout preserved, just scaled down on mobile */
     html, body {
       max-width: 100%;
       overflow-x: hidden;
     }
     
-    /* Tablet and smaller (max-width: 1100px) */
-    @media (max-width: 1100px) {
-      .hero-container {
-        grid-template-columns: 1fr;
-        gap: 60px;
-      }
-      
-      .hero-title {
-        font-size: 48px;
-      }
-      
-      .hero-left {
-        max-width: 600px;
-        margin: 0 auto;
-        text-align: center;
-      }
-      
-      .hero-left .hero-btn {
-        margin: 0 auto 16px;
-      }
-      
-      .hero-right {
-        max-width: 600px;
-        margin: 0 auto;
-      }
-    }
-    
-    /* Tablet (max-width: 768px) */
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 36px;
-      }
-      
-      .hero-subtitle {
-        font-size: 14px;
-      }
-      
-      .hero-btn {
-        padding: 14px 24px;
-        font-size: 12px;
-      }
-      
-      .pricing-cards-container {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: 0 auto 25px;
-      }
-      
-      .pricing-panel-outer {
-        padding: 20px;
-      }
-      
-      .pricing-main-title {
-        font-size: 20px;
-      }
-      
-      .diagnostic-viewport {
-        min-height: 400px;
-        padding: 20px;
-      }
-      
-      .diagnostic-content {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 20px;
-      }
-      
-      .diagnostic-col {
-        max-width: 100%;
-        width: 100%;
-      }
-      
-      .demo-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      footer {
-        padding: 20px;
-      }
-      
-      .status-bar {
-        padding: 8px 20px;
-        font-size: 9px;
-      }
-    }
-    
-    /* Mobile (max-width: 480px) */
-    @media (max-width: 480px) {
-      header {
-        padding: 16px 20px;
-      }
-      
-      .brand {
-        font-size: 14px;
-      }
-      
-      .hero-section {
-        padding: 30px 20px;
-      }
-      
-      .hero-title {
-        font-size: 28px;
-      }
-      
-      .hero-subtitle {
-        font-size: 13px;
-      }
-      
-      .hero-btn {
-        padding: 12px 20px;
-        font-size: 11px;
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .diagnostic-viewport {
-        min-height: 350px;
-        padding: 16px;
-      }
-      
-      .pricing-section {
-        padding: 30px 16px;
-      }
-      
-      .pricing-panel-outer {
-        padding: 16px;
-      }
-      
-      .pricing-card {
-        padding: 20px;
-      }
-      
-      .pricing-card-price {
-        font-size: 28px;
-      }
-      
-      .pricing-card-price span {
-        font-size: 16px;
-      }
-      
-      .pricing-features-list li {
-        font-size: 11px;
-      }
-      
-      .alert-icon {
-        width: 16px;
-        height: 16px;
-        font-size: 9px;
-      }
-      
-      .tweet-card, .reply-box, .drafts-panel {
-        padding: 12px;
-      }
-      
-      .viewport-label {
-        font-size: 9px;
-      }
-      
-      .viewport-badge {
-        font-size: 8px;
-        padding: 3px 8px;
-      }
-      
-      .diagnostic-viewport {
-        padding: 12px;
-        min-height: auto;
-      }
-      
-      .diagnostic-content {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 16px 12px;
-      }
-      
-      .diagnostic-col {
-        max-width: 100%;
-        width: 100%;
-      }
-      
-      .tweet-card, .reply-box, .drafts-panel {
-        max-width: 100%;
-        width: 100%;
-      }
-      
-      .connection-line {
-        display: none;
-      }
-    }
-    
-    /* Small mobile (max-width: 360px) */
-    @media (max-width: 360px) {
-      .hero-title {
-        font-size: 24px;
-      }
-      
-      .hero-subtitle {
-        font-size: 12px;
-      }
-      
-      .pricing-card-price {
-        font-size: 24px;
-      }
-      
-      .hero-btn svg {
-        width: 16px;
-        height: 16px;
-      }
-      
-      .container {
-        padding: 0 12px;
-      }
-    }
-    
-    /* Ensure images and SVGs are responsive */
+    /* Ensure images and SVGs don't overflow */
     img, svg {
       max-width: 100%;
       height: auto;
     }
     
-    /* Touch-friendly tap targets on mobile */
-    @media (max-width: 768px) {
-      button, .hero-btn, .pricing-cta {
-        min-height: 44px;
-      }
-      
-      .checkbox-item {
-        min-height: 44px;
-      }
-      
-      .data-stream {
-        font-size: 8px;
-        padding: 4px 8px;
-      }
-      
-      .scanlines {
-        background-size: 100% 4px;
-      }
+    /* Prevent any horizontal scroll */
+    * {
+      box-sizing: border-box;
     }
   </style>
 </head>
