@@ -1446,6 +1446,30 @@
     * {
       box-sizing: border-box;
     }
+    
+    /* Mobile: Remove excess padding and fill screen */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 0 !important;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .hero-container {
+        padding: 60px 20px;
+      }
+      
+      /* Remove extra black space from sections */
+      .demo-section,
+      .output-section,
+      .features,
+      .pricing-section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+    }
   </style>
 </head>
 <body>
