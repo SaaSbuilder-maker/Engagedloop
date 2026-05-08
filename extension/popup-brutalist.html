@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ENGAGEDLOOP - Config</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 320px;
+      background: #000000;
+      color: #e5e5e5;
+      font-family: Menlo, Monaco, 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    
+    .container {
+      padding: 16px;
+    }
+    
+    /* Header */
+    .header {
+      border-bottom: 1px solid #222222;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .header-title {
+      color: #666666;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .header-brand {
+      color: #f97316;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    
+    /* Section Labels */
+    .section-label {
+      color: #666666;
+      font-size: 10px;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    
+    /* API Key Section */
+    .api-section {
+      margin-bottom: 16px;
+    }
+    
+    .api-input {
+      width: 100%;
+      background: #0a0a0a;
+      border: 1px solid #333333;
+      color: #e5e5e5;
+      padding: 10px 12px;
+      font-family: Menlo, Monaco, 'Courier New', monospace;
+      font-size: 11px;
+    }
+    
+    .api-input:focus {
+      outline: none;
+      border-color: #f97316;
+    }
+    
+    .api-hint {
+      color: #444444;
+      font-size: 9px;
+      margin-top: 6px;
+    }
+    
+    .api-hint a {
+      color: #f97316;
+      text-decoration: none;
+    }
+    
+    /* Usage Section */
+    .usage-section {
+      background: #0a0a0a;
+      border: 1px solid #222222;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .usage-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .usage-label {
+      color: #666666;
+      font-size: 10px;
+    }
+    
+    .usage-count {
+      color: #f97316;
+      font-size: 10px;
+    }
+    
+    .usage-count.warning {
+      color: #ef4444;
+    }
+    
+    .usage-bar {
+      height: 3px;
+      background: #222222;
+      position: relative;
+    }
+    
+    .usage-fill {
+      height: 100%;
+      background: #f97316;
+    }
+    
+    .usage-fill.warning {
+      background: #ef4444;
+    }
+    
+    /* Premium Section */
+    .premium-section {
+      background: #0a0a0a;
+      border: 1px solid #f97316;
+      padding: 12px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .premium-badge {
+      color: #f97316;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+    
+    .premium-text {
+      color: #888888;
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+    
+    .btn-upgrade {
+      background: transparent;
+      border: 1px solid #f97316;
+      color: #f97316;
+      padding: 8px 16px;
+      font-family: Menlo, Monaco, 'Courier New', monospace;
+      font-size: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .btn-upgrade:hover {
+      background: rgba(249, 115, 22, 0.1);
+    }
+    
+    /* Action Button */
+    .btn-save {
+      width: 100%;
+      background: #000000;
+      border: 1px solid #444444;
+      color: #ffffff;
+      padding: 12px;
+      font-family: Menlo, Monaco, 'Courier New', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    
+    .btn-save:hover {
+      border-color: #666666;
+    }
+    
+    /* Status */
+    .status {
+      text-align: center;
+      font-size: 10px;
+      min-height: 16px;
+    }
+    
+    .status.success {
+      color: #22c55e;
+    }
+    
+    .status.error {
+      color: #ef4444;
+    }
+    
+    /* Footer */
+    .footer {
+      border-top: 1px solid #222222;
+      padding-top: 12px;
+      margin-top: 16px;
+    }
+    
+    .footer-text {
+      color: #444444;
+      font-size: 9px;
+      text-align: center;
+    }
+    
+    .footer-version {
+      color: #333333;
+      font-size: 9px;
+      text-align: center;
+      margin-top: 4px;
+    }
+    
+    /* Hidden */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-title">// CONFIGURATION_MODULE</div>
+      <div class="header-brand">[EL] ENGAGEDLOOP</div>
+    </div>
+
+    <div class="section-label">// API_KEY_INPUT</div>
+    <div class="api-section">
+      <input type="password" id="apiKey" class="api-input" placeholder="AIzaSy...">
+      <div class="api-hint">
+        Get key: <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a>
+      </div>
+    </div>
+
+    <div class="usage-section hidden" id="usageSection">
+      <div class="usage-header">
+        <span class="usage-label">// DAILY_USAGE</span>
+        <span class="usage-count" id="usageCount">000/020</span>
+      </div>
+      <div class="usage-bar">
+        <div class="usage-fill" id="usageFill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="premium-section" id="premiumSection">
+      <div class="premium-badge">[EARLY_ACCESS_AVAILABLE]</div>
+      <div class="premium-text">Unlock unlimited generations</div>
+      <button class="btn-upgrade" id="upgradeBtn">[UPGRADE: ₹99]</button>
+    </div>
+
+    <button class="btn-save" id="saveBtn">[SAVE_CONFIGURATION]</button>
+    <div class="status" id="status"></div>
+
+    <div class="footer">
+      <div class="footer-text">Click [EΣ] ASSIST on any tweet</div>
+      <div class="footer-version">v1.0 // MVP_BUILD</div>
+    </div>
+  </div>
+
+  <script src="popup-brutalist.js"></script>
+</body>
+</html>
