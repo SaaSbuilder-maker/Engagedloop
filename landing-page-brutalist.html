@@ -1838,6 +1838,7 @@
           >
           <button 
             id="waitlistBtn"
+            onmouseout="if(!this.disabled && this.textContent !== '[SUBMITTING...]') { this.style.background='#000000'; this.style.color='#f97316'; }"
             style="background: #000000; border: 1px solid #f97316; color: #f97316; padding: 12px 24px; font-family: Menlo, Monaco, 'Courier New', monospace; font-size: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;"
           >
             [JOIN_WAITLIST]
