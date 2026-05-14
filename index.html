@@ -1473,7 +1473,10 @@
       <div class="header-title">// ENGAGEDLOOP // <span>[STATUS: LIVE]</span></div>
     </div>
     <div class="brand-title">ENGAGEDLOOP</div>
-    <img src="icons/icon48.png" alt="ENGAGEDLOOP" class="logo" style="width: 40px; height: 40px; border-radius: 8px;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <a href="login.html" style="padding: 8px 16px; border: 1px solid #444; color: #888; text-decoration: none; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s;" onmouseover="this.style.borderColor='#f97316'; this.style.color='#f97316';" onmouseout="this.style.borderColor='#444'; this.style.color='#888';">[LOGIN]</a>
+      <img src="icons/icon48.png" alt="ENGAGEDLOOP" class="logo" style="width: 40px; height: 40px; border-radius: 8px;">
+    </div>
   </header>
 
   <main>
@@ -1490,23 +1493,15 @@
           <p class="hero-sub">
             > Get human-like replies in seconds — directly inside X.
           </p>
-          <a href="#" class="hero-btn">
+          <a href="login.html" class="hero-btn">
             <!-- Lightning bolt - access initiated -->
             <span class="hero-btn-bolt">⚡</span>
-            <!-- Schematized Chrome icon -->
-            <svg class="hero-btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <!-- Outer orange circle -->
-              <circle cx="12" cy="12" r="10" fill="#f97316"/>
-              <!-- Black ring center -->
-              <circle cx="12" cy="12" r="5" fill="none" stroke="#000" stroke-width="2.5"/>
-              <!-- Black Y dividing lines -->
-              <path d="M12 12L12 2" stroke="#000" stroke-width="2.5"/>
-              <path d="M12 12L19.5 17" stroke="#000" stroke-width="2.5"/>
-              <path d="M12 12L4.5 17" stroke="#000" stroke-width="2.5"/>
-              <!-- Inner orange dot -->
-              <circle cx="12" cy="12" r="2.5" fill="#f97316"/>
+            <!-- Schematized user icon -->
+            <svg class="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
             </svg>
-            <span class="hero-btn-text">[ADD TO CHROME — Try Now]</span>
+            <span class="hero-btn-text">[GET STARTED — Login / Sign Up]</span>
           </a>
           <p class="hero-meta">// COMPATIBILITY_CHECK: Chrome | Brave | Edge</p>
           
@@ -1784,7 +1779,7 @@
               <li><span class="bolt">⚡</span> Basic generation speed</li>
               <li><span class="bolt">⚡</span> Limited regenerate</li>
             </ul>
-            <button class="pricing-cta free-cta">[START FREE]</button>
+            <a href="login.html" style="text-decoration: none;"><button class="pricing-cta free-cta">[START FREE]</button></a>
           </div>
           
           <!-- PRO TIER -->
@@ -1806,7 +1801,7 @@
               <li><span class="bolt">⚡</span> Unlimited regenerate</li>
               <li><span class="bolt">⚡</span> Priority access</li>
             </ul>
-            <button class="pricing-cta pro-cta">[UPGRADE TO PRO]</button>
+            <a href="login.html" style="text-decoration: none;"><button class="pricing-cta pro-cta">[UPGRADE TO PRO]</button></a>
           </div>
         </div>
         

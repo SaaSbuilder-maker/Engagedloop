@@ -7,6 +7,14 @@
       "dest": "/index.html"
     },
     {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard.html"
+    },
+    {
       "src": "/privacy-policy",
       "dest": "/privacy-policy.html"
     },
