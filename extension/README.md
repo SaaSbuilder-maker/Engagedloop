@@ -76,7 +76,6 @@ This folder contains the complete Chrome extension for submission to the Chrome 
 
 | Permission | Reason |
 |------------|--------|
-| `activeTab` | To detect current tweet on X/Twitter |
 | `storage` | To save API key and usage locally |
 | `cookies` | To read Supabase auth session |
 | Host: `twitter.com/*` | To inject reply assist buttons |

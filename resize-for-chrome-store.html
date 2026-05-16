@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Resize Images for Chrome Store</title>
+    <style>
+        body { 
+            background: #0a0a0a; 
+            color: #e5e5e5; 
+            font-family: Arial; 
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 { color: #f97316; margin-bottom: 10px; }
+        .subtitle { color: #666; margin-bottom: 30px; }
+        .section { 
+            background: #111; 
+            border: 1px solid #333; 
+            margin: 30px 0; 
+            padding: 20px;
+        }
+        h2 { color: #f97316; font-size: 18px; margin-bottom: 10px; }
+        .specs { 
+            color: #888; 
+            font-size: 12px; 
+            margin-bottom: 15px;
+            font-family: monospace;
+            background: #1a1a1a;
+            padding: 10px;
+        }
+        .image-selector {
+            margin-bottom: 15px;
+        }
+        select {
+            background: #222;
+            color: #e5e5e5;
+            border: 1px solid #444;
+            padding: 8px 15px;
+            font-size: 14px;
+            min-width: 300px;
+        }
+        canvas { 
+            border: 2px solid #333; 
+            display: block; 
+            margin: 10px 0;
+            background: #000;
+            max-width: 100%;
+        }
+        button { 
+            background: #f97316; 
+            color: #000; 
+            border: none; 
+            padding: 12px 25px; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 14px;
+            margin: 10px 5px;
+        }
+        button:hover { background: #ff8c3a; }
+        .preview-box {
+            display: inline-block;
+            margin: 10px;
+            vertical-align: top;
+        }
+        .preview-label {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .instructions {
+            background: #1a1a1a;
+            border-left: 3px solid #f97316;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .instructions h3 {
+            color: #f97316;
+            margin-bottom: 10px;
+        }
+        .instructions ul {
+            margin-left: 20px;
+            color: #aaa;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>// RESIZE_FOR_CHROME_STORE</h1>
+    <p class="subtitle">Select your screenshots and resize to Chrome Web Store requirements</p>
+
+    <div class="instructions">
+        <h3>📋 How to use:</h3>
+        <ul>
+            <li>Step 1: Select an image from your enagedloop.items folder</li>
+            <li>Step 2: Click "Load Image" to preview</li>
+            <li>Step 3: Click "Resize & Download" to get Chrome Store sized version</li>
+            <li>Repeat for each image you need</li>
+        </ul>
+    </div>
+
+    <!-- Screenshot 1 -->
+    <div class="section">
+        <h2>📸 Screenshot 1 (1280x800)</h2>
+        <div class="specs">Required: At least 1 | Format: 1280x800 or 640x400 | JPEG or PNG</div>
+        <div class="image-selector">
+            <select id="select1">
+                <option value="">-- Select an image --</option>
+                <option value="enagedloop.items/main_imgV1.PNG">main_imgV1.PNG (Best for main screenshot)</option>
+                <option value="enagedloop.items/main_imgV2.PNG">main_imgV2.PNG</option>
+                <option value="enagedloop.items/main_imgV3.PNG">main_imgV3.PNG</option>
+                <option value="enagedloop.items/main_imgV4.PNG">main_imgV4.PNG</option>
+                <option value="enagedloop.items/main_img1.PNG">main_img1.PNG</option>
+                <option value="enagedloop.items/main_img2.PNG">main_img2.PNG</option>
+                <option value="enagedloop.items/playbook_img1.PNG">playbook_img1.PNG (Features view)</option>
+                <option value="enagedloop.items/playbook_img2.PNG">playbook_img2.PNG</option>
+            </select>
+            <button onclick="loadImage('select1', 'preview1')">Load Image</button>
+        </div>
+        <div id="preview1"></div>
+        <button onclick="resizeAndDownload('select1', 1280, 800, 'engagedloop-screenshot-1.png')">Resize & Download (1280x800)</button>
+    </div>
+
+    <!-- Screenshot 2 -->
+    <div class="section">
+        <h2>📸 Screenshot 2 (1280x800) - Optional</h2>
+        <div class="specs">Max 5 screenshots | Show different features</div>
+        <div class="image-selector">
+            <select id="select2">
+                <option value="">-- Select an image --</option>
+                <option value="enagedloop.items/playbook_img1.PNG">playbook_img1.PNG (Features page)</option>
+                <option value="enagedloop.items/playbook_img2.PNG">playbook_img2.PNG</option>
+                <option value="enagedloop.items/main_imgV2.PNG">main_imgV2.PNG</option>
+                <option value="enagedloop.items/main_imgV3.PNG">main_imgV3.PNG</option>
+            </select>
+            <button onclick="loadImage('select2', 'preview2')">Load Image</button>
+        </div>
+        <div id="preview2"></div>
+        <button onclick="resizeAndDownload('select2', 1280, 800, 'engagedloop-screenshot-2.png')">Resize & Download (1280x800)</button>
+    </div>
+
+    <!-- Small Promo -->
+    <div class="section">
+        <h2>🎯 Small Promo Tile (440x280) - Required</h2>
+        <div class="specs">Required for store listing | Canvas: 440x280 | Shows in search results</div>
+        <div class="image-selector">
+            <select id="selectSmall">
+                <option value="">-- Select an image --</option>
+                <option value="enagedloop.items/main_imgV1.PNG">main_imgV1.PNG (Recommended)</option>
+                <option value="enagedloop.items/main_img1.PNG">main_img1.PNG</option>
+            </select>
+            <button onclick="loadImage('selectSmall', 'previewSmall')">Load Image</button>
+        </div>
+        <div id="previewSmall"></div>
+        <button onclick="resizeAndDownload('selectSmall', 440, 280, 'engagedloop-small-promo.png')">Resize & Download (440x280)</button>
+    </div>
+
+    <!-- Marquee -->
+    <div class="section">
+        <h2>🎬 Marquee Promo Tile (1400x560) - Optional</h2>
+        <div class="specs">Optional but recommended | Wide banner for store homepage</div>
+        <div class="image-selector">
+            <select id="selectMarquee">
+                <option value="">-- Select an image --</option>
+                <option value="enagedloop.items/main_imgV1.PNG">main_imgV1.PNG</option>
+            </select>
+            <button onclick="loadImage('selectMarquee', 'previewMarquee')">Load Image</button>
+        </div>
+        <div id="previewMarquee"></div>
+        <button onclick="resizeAndDownload('selectMarquee', 1400, 560, 'engagedloop-marquee.png')">Resize & Download (1400x560)</button>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background: #1a1a1a; border: 1px solid #f97316;">
+        <h3 style="color: #f97316;">✅ My Recommendations:</h3>
+        <ul style="color: #aaa; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Screenshot 1:</strong> Use <code>main_imgV1.PNG</code> - Shows main interface clearly</li>
+            <li><strong>Screenshot 2:</strong> Use <code>playbook_img1.PNG</code> - Shows features/pricing</li>
+            <li><strong>Small Promo:</strong> Use <code>main_imgV1.PNG</code> resized to 440x280</li>
+            <li><strong>Marquee:</strong> Use <code>main_imgV1.PNG</code> resized to 1400x560</li>
+        </ul>
+    </div>
+
+<script>
+const loadedImages = {};
+
+function loadImage(selectId, previewId) {
+    const select = document.getElementById(selectId);
+    const path = select.value;
+    if (!path) {
+        alert('Please select an image first');
+        return;
+    }
+    
+    const img = new Image();
+    img.onload = function() {
+        loadedImages[selectId] = img;
+        const preview = document.getElementById(previewId);
+        preview.innerHTML = '';
+        
+        // Show original size info
+        const info = document.createElement('div');
+        info.style.color = '#666';
+        info.style.fontSize = '12px';
+        info.style.marginBottom = '10px';
+        info.textContent = `Original: ${img.width}x${img.height}px`;
+        preview.appendChild(info);
+        
+        // Show preview canvas (scaled down for display)
+        const canvas = document.createElement('canvas');
+        const maxWidth = 600;
+        const scale = Math.min(1, maxWidth / img.width);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        canvas.style.border = '1px solid #333';
+        
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        preview.appendChild(canvas);
+    };
+    img.src = path;
+}
+
+function resizeAndDownload(selectId, targetWidth, targetHeight, filename) {
+    const img = loadedImages[selectId];
+    if (!img) {
+        alert('Please load an image first');
+        return;
+    }
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+    const ctx = canvas.getContext('2d');
+    
+    // Fill black background
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, targetWidth, targetHeight);
+    
+    // Calculate scale to fit (cover mode)
+    const scale = Math.max(targetWidth / img.width, targetHeight / img.height);
+    const newWidth = img.width * scale;
+    const newHeight = img.height * scale;
+    const x = (targetWidth - newWidth) / 2;
+    const y = (targetHeight - newHeight) / 2;
+    
+    // Draw image centered and cropped
+    ctx.drawImage(img, x, y, newWidth, newHeight);
+    
+    // Download
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    
+    alert(`✅ Downloaded: ${filename}\nSize: ${targetWidth}x${targetHeight}px`);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Node
+node_modules/
+.next/
+out/
+build/
+
+# Secrets
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Extension Builds
+*.zip
+*.crx
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,91 @@
+ENGAGEDLOOP - CHROME STORE SUBMISSION CHECKLIST
+===============================================
+
+STEP 1: VERIFY FILES
+--------------------
+□ manifest.json - Present
+□ content-brutalist.js - Present  
+□ popup-brutalist.html - Present
+□ popup-brutalist.js - Present
+□ icons/icon16.png - Present
+□ icons/icon48.png - Present
+□ icons/icon128.png - Present
+
+STEP 2: TAKE SCREENSHOTS (5 REQUIRED)
+-------------------------------------
+□ Screenshot 1: [EΣ] button on tweet
+□ Screenshot 2: Sidebar opened
+□ Screenshot 3: Generated replies shown
+□ Screenshot 4: Playbook dashboard
+□ Screenshot 5: Quick paste mode
+
+STEP 3: CREATE ZIP FILE
+-----------------------
+Create: engagedloop.zip
+Include ONLY:
+- manifest.json
+- content-brutalist.js
+- popup-brutalist.html
+- popup-brutalist.js
+- PRIVACY.md
+- icons/ folder (all icon files)
+
+STEP 4: CHROME WEB STORE FIELDS
+-------------------------------
+Title: ENGAGEDLOOP - AI Reply Assistant for X
+
+Short Description:
+Generate human-like replies on X when you don't know what to say. Edit & post manually.
+
+Full Description:
+ENGAGEDLOOP helps you reply faster and better on X (Twitter).
+
+HOW IT WORKS:
+1. Click the [EΣ] button on any tweet
+2. Get 3 AI-generated reply suggestions instantly
+3. Edit and paste into your reply box
+
+KEY FEATURES:
+✓ Smart Reply Generation - Context-aware AI suggestions
+✓ Quick Paste Mode - Generate replies from any text
+✓ Safety First - Edit every reply before posting
+✓ Daily Playbook - Track your engagement routine
+✓ No Automation - You control every action
+
+PERFECT FOR:
+• Founders building in public
+• Indie hackers engaging with community
+• Creators growing their audience
+• Anyone wanting better replies on X
+
+PRIVACY:
+• No data collection
+• No tracking or analytics
+• API key stored locally only
+• Tweet content processed temporarily
+
+⚠️ IMPORTANT:
+Always edit replies before posting. This is an assistant tool, not automation.
+
+Privacy Policy URL: https://engagedloop.vercel.app/privacy-policy.html
+Category: Social & Communication
+Language: English
+
+STEP 5: SUBMIT
+--------------
+□ Go to https://chrome.google.com/webstore/devconsole
+□ Pay $5 developer fee (one-time)
+□ Click "New Item"
+□ Upload engagedloop.zip
+□ Fill all fields (copy from above)
+□ Upload 5 screenshots
+□ Add privacy policy URL
+□ Submit for review
+
+STEP 6: WAIT
+------------
+Review time: 1-7 days
+You'll get email notification
+
+===============================================
+READY TO LAUNCH! 🚀

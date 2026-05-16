@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const percentage = (count / userLimit) * 100;
     const limitText = isConnected ? (userLimit === 30 ? '30 ⭐ PRO' : '3') : `${userLimit} (local)`;
     usageCountEl.textContent = `${String(count).padStart(3, '0')}/${limitText}`;
-    usageFill.style.width = `${percentage}%`;
+    usageFill.style.width = `${Math.min(percentage, 100)}%`;
     
     if (count >= userLimit * 0.8) {
       usageCountEl.classList.add('warning');

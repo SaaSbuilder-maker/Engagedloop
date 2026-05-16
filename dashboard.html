@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DASHBOARD // ENGAGEDLOOP</title>
+  <link rel="icon" type="image/png" href="extension/icons/icon32.png">
   <style>
     * {
       margin: 0;
@@ -466,8 +467,8 @@
         <div class="sidebar-body">
           <div class="extension-box">
             <div class="extension-status">
-              <div class="status-indicator"></div>
-              <span class="status-text">Sync Active</span>
+              <div class="status-indicator" style="background: #f97316;"></div>
+              <span class="status-text">Waiting for extension...</span>
             </div>
             <p style="font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 16px;">
               Your extension is connected. Login session will sync to Chrome extension automatically.
@@ -599,6 +600,26 @@
         e.preventDefault();
         alert('Chrome Store link coming soon!');
       });
+      
+      // Sync to extension
+      setTimeout(syncToExtension, 1500); // Wait a bit for content script to load
+      
+      window.addEventListener("message", function(event) {
+        if (event.data && event.data.type === "ENGAGEDLOOP_AUTH_SYNC_SUCCESS") {
+          document.querySelector('.status-text').textContent = 'Sync Active';
+          document.querySelector('.status-indicator').style.background = '#22c55e';
+        }
+      });
+    }
+    
+    function syncToExtension() {
+      if (currentUser) {
+        window.postMessage({
+          type: "ENGAGEDLOOP_AUTH_SYNC",
+          user: currentUser,
+          profile: userProfile
+        }, "*");
+      }
     }
     
     async function loadProfile() {

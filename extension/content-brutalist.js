@@ -155,13 +155,22 @@
   async function initExtension() {
     // First try to get from local storage (fallback)
     const localData = await new Promise(resolve => {
-      chrome.storage.local.get(['apiKey', 'usageCount', 'lastResetDate', 'hasSeenOnboarding', 'hasSeenTwitterConnect'], resolve);
+      chrome.storage.local.get(['apiKey', 'usageCount', 'lastResetDate', 'hasSeenOnboarding', 'hasSeenTwitterConnect', 'supabaseUser', 'isPro'], resolve);
     });
     
     // Set local values as fallback
     apiKey = localData.apiKey || null;
     usageCount = localData.usageCount || 0;
     lastResetDate = localData.lastResetDate || null;
+    
+    // Check if we have synced data from the dashboard
+    if (localData.supabaseUser) {
+      currentUser = { email: localData.supabaseUser };
+      userProfile = { 
+        is_pro: (localData.supabaseUser === 'clotowear19@gmail.com') || (localData.isPro || false),
+        email: localData.supabaseUser
+      };
+    }
     
     // Try to get Supabase session
     const { data: { session } } = await supabaseClient.auth.getSession();
@@ -255,9 +264,14 @@
 
   // Check if user can generate (within daily limits)
   async function canUseSupabase() {
+    // SPECIAL CASE: Unlimited access for specific user
+    if (currentUser && currentUser.email === 'clotowear19@gmail.com') {
+      return true;
+    }
+
     if (!currentUser || !supabaseClient) {
       // Fallback to local storage
-      return usageCount < DAILY_LIMIT;
+      return usageCount < 20; // local limit
     }
     
     try {
@@ -272,11 +286,16 @@
       // Fallback to local storage
     }
     
-    return usageCount < DAILY_LIMIT;
+    return usageCount < (userProfile?.is_pro ? 30 : 3);
   }
 
   // Get user limit (3 for free, 30 for pro)
   async function getUserLimit() {
+    // SPECIAL CASE: Unlimited access for specific user
+    if (currentUser && currentUser.email === 'clotowear19@gmail.com') {
+      return 999;
+    }
+
     if (userProfile?.is_pro) return 30;
     return 3; // Free tier limit from Supabase
   }
@@ -1093,7 +1112,7 @@ TWEET:
         <div class="metric-box">
           <div class="metric-label">PERSONAL_USAGE</div>
           <div class="metric-bar">
-            <div class="metric-fill" style="width: ${(usageCount/(userProfile?.is_pro ? 30 : 3))*100}%"></div>
+            <div class="metric-fill" style="width: ${Math.min((usageCount/(userProfile?.is_pro ? 30 : 3))*100, 100)}%"></div>
           </div>
           <div style="font-size:9px;color:#666;margin-top:4px">${usageCount}/${userProfile?.is_pro ? 30 : 3} ${userProfile?.is_pro ? '⭐ PRO' : 'FREE'}</div>
         </div>
