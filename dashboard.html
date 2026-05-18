@@ -473,7 +473,7 @@
             <p style="font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 16px;">
               Your extension is connected. Login session will sync to Chrome extension automatically.
             </p>
-            <a href="#" class="chrome-link" id="chromeLink">Get Chrome Extension →</a>
+            <a href="https://chromewebstore.google.com/detail/engagedloop/pockjnmfjhhdopojcicdpcgddmlcecng" target="_blank" class="chrome-link" id="chromeLink">Get Chrome Extension →</a>
           </div>
         </div>
       </div>
@@ -596,11 +596,6 @@
       document.getElementById('profileForm').addEventListener('submit', saveProfile);
       document.getElementById('refreshBtn').addEventListener('click', loadUsageStats);
       document.getElementById('upgradeBtn').addEventListener('click', handleUpgrade);
-      document.getElementById('chromeLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Chrome Store link coming soon!');
-      });
-      
       // Sync to extension
       setTimeout(syncToExtension, 1500); // Wait a bit for content script to load
       
